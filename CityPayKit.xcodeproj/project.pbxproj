@@ -9,7 +9,12 @@
 /* Begin PBXBuildFile section */
 		4E7821A11B9473F8008CB0E8 /* CityPayKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E7821A01B9473F8008CB0E8 /* CityPayKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E7821A71B9473F8008CB0E8 /* CityPayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E78219B1B9473F8008CB0E8 /* CityPayKit.framework */; };
-		4E7821AE1B9473F8008CB0E8 /* CityPayKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7821AD1B9473F8008CB0E8 /* CityPayKitTests.swift */; };
+		4E7821B81B94743A008CB0E8 /* CityPayRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7821B71B94743A008CB0E8 /* CityPayRequest.swift */; };
+		4E7821BA1B947477008CB0E8 /* CityPayResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7821B91B947477008CB0E8 /* CityPayResponse.swift */; };
+		4E7821BD1B9474BA008CB0E8 /* CityPayKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7821BC1B9474BA008CB0E8 /* CityPayKitTests.swift */; };
+		4E7821C11B947590008CB0E8 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7821C01B947590008CB0E8 /* SwiftyJSON.swift */; };
+		4E7821C51B9476F0008CB0E8 /* example1.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E7821C31B9476F0008CB0E8 /* example1.json */; };
+		4E7821C61B9476F0008CB0E8 /* sha256-example.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E7821C41B9476F0008CB0E8 /* sha256-example.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +33,13 @@
 		4E7821A01B9473F8008CB0E8 /* CityPayKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityPayKit.h; sourceTree = "<group>"; };
 		4E7821A61B9473F8008CB0E8 /* CityPayKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CityPayKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E7821AC1B9473F8008CB0E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4E7821AD1B9473F8008CB0E8 /* CityPayKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityPayKitTests.swift; sourceTree = "<group>"; };
+		4E7821B71B94743A008CB0E8 /* CityPayRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityPayRequest.swift; sourceTree = "<group>"; };
+		4E7821B91B947477008CB0E8 /* CityPayResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityPayResponse.swift; sourceTree = "<group>"; };
+		4E7821BB1B9474B9008CB0E8 /* CityPayKitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CityPayKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		4E7821BC1B9474BA008CB0E8 /* CityPayKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityPayKitTests.swift; sourceTree = "<group>"; };
+		4E7821C01B947590008CB0E8 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		4E7821C31B9476F0008CB0E8 /* example1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example1.json; sourceTree = "<group>"; };
+		4E7821C41B9476F0008CB0E8 /* sha256-example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sha256-example.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +82,9 @@
 		4E78219D1B9473F8008CB0E8 /* CityPayKit */ = {
 			isa = PBXGroup;
 			children = (
+				4E7821C01B947590008CB0E8 /* SwiftyJSON.swift */,
+				4E7821B91B947477008CB0E8 /* CityPayResponse.swift */,
+				4E7821B71B94743A008CB0E8 /* CityPayRequest.swift */,
 				4E7821A01B9473F8008CB0E8 /* CityPayKit.h */,
 				4E78219E1B9473F8008CB0E8 /* Supporting Files */,
 			);
@@ -88,8 +102,9 @@
 		4E7821AA1B9473F8008CB0E8 /* CityPayKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				4E7821AD1B9473F8008CB0E8 /* CityPayKitTests.swift */,
+				4E7821BC1B9474BA008CB0E8 /* CityPayKitTests.swift */,
 				4E7821AB1B9473F8008CB0E8 /* Supporting Files */,
+				4E7821BB1B9474B9008CB0E8 /* CityPayKitTests-Bridging-Header.h */,
 			);
 			path = CityPayKitTests;
 			sourceTree = "<group>";
@@ -97,6 +112,8 @@
 		4E7821AB1B9473F8008CB0E8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4E7821C31B9476F0008CB0E8 /* example1.json */,
+				4E7821C41B9476F0008CB0E8 /* sha256-example.json */,
 				4E7821AC1B9473F8008CB0E8 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -199,6 +216,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E7821C51B9476F0008CB0E8 /* example1.json in Resources */,
+				4E7821C61B9476F0008CB0E8 /* sha256-example.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +228,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E7821C11B947590008CB0E8 /* SwiftyJSON.swift in Sources */,
+				4E7821B81B94743A008CB0E8 /* CityPayRequest.swift in Sources */,
+				4E7821BA1B947477008CB0E8 /* CityPayResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E7821AE1B9473F8008CB0E8 /* CityPayKitTests.swift in Sources */,
+				4E7821BD1B9474BA008CB0E8 /* CityPayKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +257,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = (
+					i386,
+					x86_64,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -274,6 +301,8 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				"VALID_ARCHS[sdk=iphoneos*]" = "arm64 armv7 armv7s";
+				"VALID_ARCHS[sdk=iphonesimulator*]" = "x86_64 i386";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -283,6 +312,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphonesimulator*]" = (
+					x86_64,
+					i386,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -312,9 +346,12 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				"VALID_ARCHS[sdk=iphoneos*]" = "arm64 armv7 armv7s";
+				"VALID_ARCHS[sdk=iphonesimulator*]" = "x86_64 i386";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -323,6 +360,7 @@
 		4E7821B21B9473F8008CB0E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -332,12 +370,15 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				"SWIFT_INCLUDE_PATHS[arch=*]" = "/Users/gary/git/citypay-applepay-ios-sdk/CommonCrypto";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		4E7821B31B9473F8008CB0E8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -347,12 +388,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				"SWIFT_INCLUDE_PATHS[arch=*]" = "/Users/gary/git/citypay-applepay-ios-sdk/CommonCrypto";
 			};
 			name = Release;
 		};
 		4E7821B51B9473F8008CB0E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -364,12 +407,15 @@
 				INFOPLIST_FILE = CityPayKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CityPayKitTests/CityPayKitTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		4E7821B61B9473F8008CB0E8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -377,6 +423,7 @@
 				INFOPLIST_FILE = CityPayKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CityPayKitTests/CityPayKitTests-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -399,6 +446,7 @@
 				4E7821B31B9473F8008CB0E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4E7821B41B9473F8008CB0E8 /* Build configuration list for PBXNativeTarget "CityPayKitTests" */ = {
 			isa = XCConfigurationList;
@@ -407,6 +455,7 @@
 				4E7821B61B9473F8008CB0E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
