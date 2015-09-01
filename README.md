@@ -13,7 +13,7 @@ Also See [http://citypay.com/docs]
 The payment button should only be displayed if the user can make payments. There are 2 levels to check 
 `canMakePayments` determines that the device is capable of conducting ApplePay payments; and
 `canMakePaymentsUsingNetworks` determines that the device can use the given network. The actual decision on this is complex and determined by Apple and the Card Issuer. 
-``` 
+```swift
 import PassKit
 import UIKit
 import CityPayKit
@@ -42,7 +42,7 @@ class MyApplePayController: UIViewController {
 
 ## Initialise a PKPaymentRequest
 Apple Pay is centralised around the PKPaymentRequest which should be used to initialise the Apple Pay payment.
-```
+```swift
 // initialise a PK Payment Request
 let request = PKPaymentRequest()
 request.merchantIdentifier = "YOUR_APPLE_PAY_MERCHANT_ID"
@@ -77,7 +77,7 @@ The following recommendations are made
 
 ## Create a PKPaymentAuthorizationViewController
 When the user selects the Apply Pay button you will need to add a controller to initiate the Apple Pay process
-```
+```swift
 // initialise the payment view controller with the payment request
 let applePayController = PKPaymentAuthorizationViewController(paymentRequest: request)
 // set as controller's delegate to manage payment
