@@ -28,7 +28,7 @@ using standard JSON serialization methods and
     }
 
 */
-public class CPResponse: NSObject {
+public class CityPayResponse: NSObject {
     
     public let amount: Int
     public let currency: String
@@ -45,7 +45,6 @@ public class CPResponse: NSObject {
     public let merchantId: Int
     public let mode: String
     public let result: Int
-    public let sha1: String
     public let sha256: String
     public let status: String
     public let title: String?
@@ -60,6 +59,10 @@ public class CPResponse: NSObject {
         CC_SHA256(data.bytes, CC_LONG(data.length), &hash)
         let res = NSData(bytes: hash, length: Int(CC_SHA256_DIGEST_LENGTH))
         return res.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.allZeros)
+    }
+    
+    func log() -> String {
+        return "RS:\(identifier),amount=\(amount),card=\(maskedPan),\(expMonth)\(expYear),authorised=\(authorised),mode=\(mode)"
     }
     
     /// Determines if the data provided is valid based on the sha256 value. The licence key provides a salt
@@ -79,10 +82,62 @@ public class CPResponse: NSObject {
             return b64 == sha256
         }
         return false
-
-        
     }
-
+    
+    // Creates a rejected CPResponse from this response. This allows the object cycle to be rejected
+    // by workflow such as an invalid digest information.
+    func rejectAuth(licenceKey: String, errormsg: String) -> CityPayResponse {
+        NSLog("Rejecting auth \(errormsg)")
+        // recreate digest
+        let ec = "099"
+        var str = authcode ?? ""
+        str += toString(amount) +
+            ec +
+            toString(merchantId) +
+            toString(transno) +
+            identifier +
+            licenceKey
+        let data = (str as NSString).dataUsingEncoding(NSUTF8StringEncoding)!
+        let digest = b64_sha256(data)
+        return CityPayResponse(
+            amount:amount, currency:currency, authcode:authcode, authorised:false,
+            AvsResponse:AvsResponse, CscResponse:CscResponse, errorcode:ec, errormsg:errormsg,
+            expMonth:expMonth, expYear:expYear, identifier:identifier, maskedPan:maskedPan,
+            merchantId:merchantId, mode:mode, result:2, sha256:digest,
+            status:status, title:title, firstname:firstname, lastname:lastname,
+            email:email, postcode:postcode, transno:transno)
+    }
+    
+    init(amount: Int, currency: String, authcode: String?, authorised: Bool,
+        AvsResponse: String?, CscResponse: String?, errorcode: String, errormsg: String,
+        expMonth: Int, expYear: Int, identifier: String, maskedPan: String,
+        merchantId: Int, mode: String, result: Int, sha256: String,
+        status: String, title: String?, firstname:String?, lastname:String?,
+        email: String?,postcode: String?,transno: Int) {
+        self.amount 			    = amount
+        self.currency 			  = currency
+        self.authcode 			  = authcode
+        self.authorised 			= authorised
+        self.AvsResponse 			= AvsResponse
+        self.CscResponse 			= CscResponse
+        self.errorcode 			  = errorcode
+        self.errormsg 			  = errormsg
+        self.expMonth 			  = expMonth
+        self.expYear 			    = expYear
+        self.identifier 			= identifier
+        self.maskedPan 			  = maskedPan
+        self.merchantId 			= merchantId
+        self.mode 			      = mode
+        self.result 			    = result
+        self.sha256 			    = sha256
+        self.status 			    = status
+        self.title 			      = title
+        self.firstname 			  = firstname
+        self.lastname 			  = lastname
+        self.email 			      = email
+        self.postcode 			  = postcode
+        self.transno 			    = transno
+    }
 
     /// only way to initialise is via a JSON packet
     public init(data: NSData) {
@@ -106,7 +161,6 @@ public class CPResponse: NSObject {
         self.merchantId = json["merchantid"].int ?? 0
         self.mode = json["mode"].string ?? "?"
         self.result = json["result"].int ?? 20 // unknown
-        self.sha1 = json["sha1"].string ?? ""
         self.sha256 = json["sha256"].string ?? ""
         self.status = json["status"].string ?? "?" // unknown
         self.title = json["title"].string
@@ -118,6 +172,7 @@ public class CPResponse: NSObject {
         
         
     }
+    
     
     
     

@@ -51,11 +51,11 @@ class CityPayKitTests: XCTestCase {
         
     }
     
-    func loadJsonExampleAndTest(name:String?, ofType: String?) -> CPResponse? {
+    func loadJsonExampleAndTest(name:String?, ofType: String?) -> CityPayResponse? {
         if let path = NSBundle(forClass: CityPayKitTests.self).pathForResource(name, ofType: ofType) {
             println("Found \(path)")
             if let data = NSData(contentsOfFile: path) {
-               return CPResponse(data: data)
+               return CityPayResponse(data: data)
             } else {
                 XCTFail("Failed to obtain a JSON object")
             }
@@ -66,37 +66,19 @@ class CityPayKitTests: XCTestCase {
     }
     
     func testJsonRequest() {
-        let pay = CPPayment(merchantId: 13245, licenceKey: "LK", identifier: "Test1", test: true)
+        let pay = CityPayRequest(merchantId: 13245, licenceKey: "LK", identifier: "Test1", test: true)
         if let json = pay.toJson() {
             let str = NSString(data: json, encoding: NSUTF8StringEncoding)
             println(str)
             // need to link in swifty to tests
-//            let decoded = JSON(data: json, options: NSJSONReadingOptions.AllowFragments, error: nil)
-//            XCTAssertEqual(decoded["merchantId"], 13245, "Expect merchant id to match")
-//            XCTAssertEqual(decoded["licenceKey"], "LK", "Expect licencekey to match")
-//            XCTAssertEqual(decoded["identifier"], "Test1", "Expect identifier to match")
-//            XCTAssertEqual(decoded["test"], true, "Expect test mode to match")
+            let decoded = JSON(data: json, options: NSJSONReadingOptions.AllowFragments, error: nil)
+            XCTAssertEqual(decoded["merchantId"], 13245, "Expect merchant id to match")
+            XCTAssertEqual(decoded["licenceKey"], "LK", "Expect licencekey to match")
+            XCTAssertEqual(decoded["identifier"], "Test1", "Expect identifier to match")
         } else {
             XCTFail("Json cannot be generated")
         }
     }
     
-    
-    func testPerformanceExample() {
-//        
-//        self.measureBlock() {
-                let pay = CPPayment(merchantId: 13245, licenceKey: "LK", identifier: "Test1", test: true)
-                if let json = pay.toJson() {
-                    pay.call(json)
-                    println("complete")
-                } else {
-                    XCTFail("Json cannot be generated")
-            }
-
-            
-            
-
-//        }
-    }
     
 }
