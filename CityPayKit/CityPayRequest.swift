@@ -112,6 +112,7 @@ public class CityPayRequest: NSObject {
         
         NSLog("Sending call to \(CityPayConstants.url)")
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: handler)
+
     }
     
 }
