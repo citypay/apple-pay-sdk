@@ -8,7 +8,6 @@
 
 import UIKit
 import XCTest
-import SwiftyJSON
 import CityPayKit
 
 class CityPayKitTests: XCTestCase {
