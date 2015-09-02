@@ -12,9 +12,10 @@
 		4E7821B81B94743A008CB0E8 /* CityPayRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7821B71B94743A008CB0E8 /* CityPayRequest.swift */; };
 		4E7821BA1B947477008CB0E8 /* CityPayResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7821B91B947477008CB0E8 /* CityPayResponse.swift */; };
 		4E7821BD1B9474BA008CB0E8 /* CityPayKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7821BC1B9474BA008CB0E8 /* CityPayKitTests.swift */; };
-		4E7821C11B947590008CB0E8 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7821C01B947590008CB0E8 /* SwiftyJSON.swift */; };
 		4E7821C51B9476F0008CB0E8 /* example1.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E7821C31B9476F0008CB0E8 /* example1.json */; };
 		4E7821C61B9476F0008CB0E8 /* sha256-example.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E7821C41B9476F0008CB0E8 /* sha256-example.json */; };
+		4EB2A9251B969520006E90DB /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EB2A9241B969520006E90DB /* SwiftyJSON.framework */; };
+		4EB2A92A1B9696F7006E90DB /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EB2A9241B969520006E90DB /* SwiftyJSON.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +28,18 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4EB2A9231B9694B5006E90DB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		4E78219B1B9473F8008CB0E8 /* CityPayKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CityPayKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E78219F1B9473F8008CB0E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,9 +50,10 @@
 		4E7821B91B947477008CB0E8 /* CityPayResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityPayResponse.swift; sourceTree = "<group>"; };
 		4E7821BB1B9474B9008CB0E8 /* CityPayKitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CityPayKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		4E7821BC1B9474BA008CB0E8 /* CityPayKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityPayKitTests.swift; sourceTree = "<group>"; };
-		4E7821C01B947590008CB0E8 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		4E7821C31B9476F0008CB0E8 /* example1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example1.json; sourceTree = "<group>"; };
 		4E7821C41B9476F0008CB0E8 /* sha256-example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sha256-example.json"; sourceTree = "<group>"; };
+		4EB2A9241B969520006E90DB /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		4EB2A9281B969677006E90DB /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EB2A9251B969520006E90DB /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +70,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E7821A71B9473F8008CB0E8 /* CityPayKit.framework in Frameworks */,
+				4EB2A92A1B9696F7006E90DB /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +80,8 @@
 		4E7821911B9473F8008CB0E8 = {
 			isa = PBXGroup;
 			children = (
+				4EB2A9281B969677006E90DB /* libcommonCrypto.dylib */,
+				4EB2A9241B969520006E90DB /* SwiftyJSON.framework */,
 				4E78219D1B9473F8008CB0E8 /* CityPayKit */,
 				4E7821AA1B9473F8008CB0E8 /* CityPayKitTests */,
 				4E78219C1B9473F8008CB0E8 /* Products */,
@@ -82,7 +100,6 @@
 		4E78219D1B9473F8008CB0E8 /* CityPayKit */ = {
 			isa = PBXGroup;
 			children = (
-				4E7821C01B947590008CB0E8 /* SwiftyJSON.swift */,
 				4E7821B91B947477008CB0E8 /* CityPayResponse.swift */,
 				4E7821B71B94743A008CB0E8 /* CityPayRequest.swift */,
 				4E7821A01B9473F8008CB0E8 /* CityPayKit.h */,
@@ -141,6 +158,8 @@
 				4E7821971B9473F8008CB0E8 /* Frameworks */,
 				4E7821981B9473F8008CB0E8 /* Headers */,
 				4E7821991B9473F8008CB0E8 /* Resources */,
+				4EB2A9231B9694B5006E90DB /* CopyFiles */,
+				4EB2A9271B969577006E90DB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -223,12 +242,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4EB2A9271B969577006E90DB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4E7821961B9473F8008CB0E8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E7821C11B947590008CB0E8 /* SwiftyJSON.swift in Sources */,
 				4E7821B81B94743A008CB0E8 /* CityPayRequest.swift in Sources */,
 				4E7821BA1B947477008CB0E8 /* CityPayResponse.swift in Sources */,
 			);
@@ -365,9 +400,17 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = CityPayKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				"SWIFT_INCLUDE_PATHS[arch=*]" = "/Users/gary/git/citypay-applepay-ios-sdk/CommonCrypto";
@@ -383,9 +426,17 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = CityPayKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				"SWIFT_INCLUDE_PATHS[arch=*]" = "/Users/gary/git/citypay-applepay-ios-sdk/CommonCrypto";
@@ -399,6 +450,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -419,6 +471,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = CityPayKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
