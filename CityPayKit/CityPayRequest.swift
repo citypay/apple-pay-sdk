@@ -111,7 +111,7 @@ public class CityPayRequest: NSObject {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
         NSLog("Sending call to \(CityPayConstants.url)")
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler: handler)
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: handler)
     }
     
 }
