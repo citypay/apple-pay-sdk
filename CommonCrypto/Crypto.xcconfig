@@ -1,0 +1,4 @@
+MODULEMAP_FILE[sdk=macosx*] = $(SRCROOT)/Crypto/mac_osx.modulemap
+MODULEMAP_FILE[sdk=iphonesimulator*] = $(SRCROOT)/Crypto/iphone_ios_simulator.modulemap
+MODULEMAP_FILE[sdk=iphoneos*] = $(SRCROOT)/Crypto/iphone_ios.modulemap
+

@@ -58,7 +58,7 @@ public class CityPayResponse: NSObject {
         var hash = [UInt8](count: Int(CC_SHA256_DIGEST_LENGTH), repeatedValue: 0)
         CC_SHA256(data.bytes, CC_LONG(data.length), &hash)
         let res = NSData(bytes: hash, length: Int(CC_SHA256_DIGEST_LENGTH))
-        return res.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.allZeros)
+        return res.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
     }
     
     func log() -> String {
@@ -70,10 +70,10 @@ public class CityPayResponse: NSObject {
     public func isValid(licenceKey: String) -> Bool {
        
         var str = authcode ?? ""
-        str += toString(amount) +
+        str += String(amount) +
             errorcode +
-            toString(merchantId) +
-            toString(transno) +
+            String(merchantId) +
+            String(transno) +
             identifier +
             licenceKey
         
@@ -91,10 +91,10 @@ public class CityPayResponse: NSObject {
         // recreate digest
         let ec = "099"
         var str = authcode ?? ""
-        str += toString(amount) +
+        str += String(amount) +
             ec +
-            toString(merchantId) +
-            toString(transno) +
+            String(merchantId) +
+            String(transno) +
             identifier +
             licenceKey
         let data = (str as NSString).dataUsingEncoding(NSUTF8StringEncoding)!

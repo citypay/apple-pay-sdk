@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B5297A9D754DA08DF990D41CF9449D45F987A672",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B5297A9D754DA08DF990D41CF9449D45F987A672" : 0,
+    "4CDC79584BB10BE4B45FB9C8DD34A765DA8B0553" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "314FAC12-6A83-4C28-9A74-C66CBB789678",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B5297A9D754DA08DF990D41CF9449D45F987A672" : "CityPayKit",
+    "4CDC79584BB10BE4B45FB9C8DD34A765DA8B0553" : "CommonCrypto\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CityPayKit",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CityPayKit.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/citypay\/common-crypto.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4CDC79584BB10BE4B45FB9C8DD34A765DA8B0553"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/citypay\/apple-pay-sdk.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B5297A9D754DA08DF990D41CF9449D45F987A672"
+    }
+  ]
+}

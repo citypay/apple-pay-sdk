@@ -53,7 +53,7 @@ class CityPayKitTests: XCTestCase {
     
     func loadJsonExampleAndTest(name:String?, ofType: String?) -> CityPayResponse? {
         if let path = NSBundle(forClass: CityPayKitTests.self).pathForResource(name, ofType: ofType) {
-            println("Found \(path)")
+            print("Found \(path)")
             if let data = NSData(contentsOfFile: path) {
                return CityPayResponse(data: data)
             } else {
@@ -69,7 +69,7 @@ class CityPayKitTests: XCTestCase {
         let pay = CityPayRequest(merchantId: 13245, licenceKey: "LK", identifier: "Test1", test: true)
         if let json = pay.toJson() {
             let str = NSString(data: json, encoding: NSUTF8StringEncoding)
-            println(str)
+            print(str)
             // need to link in swifty to tests
             let decoded = JSON(data: json, options: NSJSONReadingOptions.AllowFragments, error: nil)
             XCTAssertEqual(decoded["merchantId"], 13245, "Expect merchant id to match")

@@ -1,5 +1,4 @@
 //
-//  HelloWorld.swift
 //  CityPayKit
 //
 //  Created by Gary Feltham on 26/08/2015.
@@ -10,7 +9,13 @@ import UIKit
 import PassKit
 
 struct CityPayConstants {
-    static let url = NSURL(string: "https://secure.citypay.com/paylink3/http-logger")
+    static let url = NSURL(string: "https://secure.citypay.com/applepay/v1")
+}
+
+enum CityPayPolicy: Int {
+    case Default = 0
+    case Enforce
+    case Bypass
 }
 
 public class CityPayRequest: NSObject {
@@ -19,18 +24,48 @@ public class CityPayRequest: NSObject {
     let licenceKey: String
     let identifier: String
     let test: Bool
+    let version: String = CityPayRequest.getVersion()
+    
+    
+    var avsAddressPolicy: CityPayPolicy = CityPayPolicy.Default
+    var avsPostcodePolicy: CityPayPolicy = CityPayPolicy.Default
 
+    private static func getVersionFromBundle(bundle: NSBundle) -> String? {
+        var infoDic: [String: AnyObject]? = bundle.infoDictionary
+        if (infoDic != nil) {
+            return infoDic!["CFBundleVersion"] as? String
+        } else {
+            return nil
+        }
+    }
+    
+    private static func getVersion() -> String {
+        var temp: String?
+        
+        temp = getVersionFromBundle(
+            NSBundle.mainBundle()
+        )
+        
+        if (temp == nil) {
+            temp = getVersionFromBundle(
+                NSBundle(forClass: CityPayRequest.self)
+            )
+        }
+        
+        return ((temp != nil) ? temp! : "Unknown CityPayKit host")
+    }
     
     public init(merchantId: Int, licenceKey: String, identifier: String, test: Bool) {
         assert(merchantId > 0, "Merchant ID is not valid")
         assert(licenceKey != "", "Licence Key is not provided")
         assert(identifier != "", "Identifier is not provided")
-        assert(count(identifier) >= 5, "Identifier must be between 5 and 50 characters")
-        assert(count(identifier) < 50, "Identifier must be between 5 and 50 characters")
+        assert(identifier.characters.count >= 5, "Identifier must be between 5 and 50 characters")
+        assert(identifier.characters.count < 50, "Identifier must be between 5 and 50 characters")
         self.merchantId = merchantId
         self.licenceKey = licenceKey
         self.identifier = identifier
         self.test = test
+        NSLog(self.version)
     }
     
     func cpJson() -> NSDictionary {
@@ -38,13 +73,15 @@ public class CityPayRequest: NSObject {
             "merchantId": merchantId,
             "licenceKey": licenceKey,
             "identifier": identifier,
-            "test": toString(test)
+            "test": String(test),
+            "sdkVersion": version,
+            "deviceVersion": NSProcessInfo().operatingSystemVersionString
         ]
     }
     
     // used for testing
     @objc public func toJson() -> NSData? {
-        return NSJSONSerialization.dataWithJSONObject(cpJson(), options: NSJSONWritingOptions.allZeros, error: nil)
+        return try? NSJSONSerialization.dataWithJSONObject(cpJson(), options: NSJSONWritingOptions())
     }
     
     
@@ -53,17 +90,61 @@ public class CityPayRequest: NSObject {
     // and call this function
     public func applePay(controller: PKPaymentAuthorizationViewController, payment: PKPayment, completion: (PKPaymentAuthorizationStatus) -> Void, paymentResponse: (CityPayResponse) -> Void) {
     
-        let obj = [
-            "payment": payment,
-            "merchant": cpJson()]
+        NSLog("ApplePay payment started")
         
-        if let json = NSJSONSerialization.dataWithJSONObject(obj, options: NSJSONWritingOptions.allZeros, error: nil) {
-            call(json, completionHandler: {(response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+        var obj = [
+            "payment": payment.token.paymentData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions()),
+            "transactionIdentifier": payment.token.transactionIdentifier,
+            "gateway": cpJson()]
+        
+        let os = NSProcessInfo().operatingSystemVersion
+        switch (os.majorVersion, os.minorVersion, os.patchVersion) {
+        case (8, _, _):
+            obj["billing"] = "" // TODO addition of billing data from ABRecord
+        default:
+            NSLog("Using PKContact")
+            let billdata = [
+                "title": payment.billingContact?.name?.namePrefix ?? "",
+                "lastname": payment.billingContact?.name?.familyName ?? "",
+                "firstname": payment.billingContact?.name?.givenName ?? "",
+                "email": payment.billingContact?.emailAddress ?? "",
+                "address1": payment.billingContact?.postalAddress?.street ?? "",
+                "address2": payment.billingContact?.postalAddress?.city ?? "",
+                "area": payment.billingContact?.postalAddress?.state ?? "",
+                "postcode": payment.billingContact?.postalAddress?.postalCode ?? "",
+                "country": payment.billingContact?.postalAddress?.ISOCountryCode ?? ""
+            ]
+            obj["billing"] = try? NSJSONSerialization.dataWithJSONObject(billdata, options: NSJSONWritingOptions())
+        }
+        
+        if (avsAddressPolicy != CityPayPolicy.Default || avsPostcodePolicy != CityPayPolicy.Default) {
+            obj["options"] = [
+                "avsAddressPolicy": String(avsAddressPolicy.rawValue),
+                "avsPostcodePolicy": String(avsPostcodePolicy.rawValue)
+            ]
+        }
+        
+//        
+        NSLog("Serializing JSON")
+        if let json = try? NSJSONSerialization.dataWithJSONObject(obj, options: NSJSONWritingOptions()) {
+            
+            
+            let request = NSMutableURLRequest()
+            request.URL = CityPayConstants.url
+            request.HTTPMethod = "POST"
+            request.HTTPBody = json
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            NSLog("Sending call to \(CityPayConstants.url)")
+            NSURLSession.sharedSession().dataTaskWithRequest(request) {
+                data, response, error in
+                
                 if let http = response as? NSHTTPURLResponse {
                     NSLog("Response: \(http.statusCode)")
                     
                     // decode the response
-                    let resp = CityPayResponse(data: data)
+                    let resp = CityPayResponse(data: data!)
                     // check the result of the sha2 digest
                     if (resp.isValid(self.licenceKey)) {
                         // send to the completion handler for the UI based on the response
@@ -90,29 +171,11 @@ public class CityPayRequest: NSObject {
                     NSLog("Response not NSHTTPURLResponse: \(error)")
                     completion(PKPaymentAuthorizationStatus.Failure)
                 }
-            })
+            }
         } else {
             assert(false, "JSON creation failure")
         }
         
     }
-    
-    /// direct function to process json data to the configured endpoint
-    func call(data: NSData, completionHandler handler: (NSURLResponse!, NSData!, NSError!) -> Void) {
-        
-        let sessionConfig = NSURLSessionConfiguration.ephemeralSessionConfiguration()
-        let session = NSURLSession(configuration: sessionConfig)
-        
-        let request = NSMutableURLRequest()
-        request.URL = CityPayConstants.url
-        request.HTTPMethod = "POST"
-        request.HTTPBody = data
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        NSLog("Sending call to \(CityPayConstants.url)")
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: handler)
 
-    }
-    
 }
