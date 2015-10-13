@@ -114,7 +114,19 @@ public class CityPayRequest: NSObject {
                 "postcode": payment.billingContact?.postalAddress?.postalCode ?? "",
                 "country": payment.billingContact?.postalAddress?.ISOCountryCode ?? ""
             ]
-            obj["billing"] = try? NSJSONSerialization.dataWithJSONObject(billdata, options: NSJSONWritingOptions())
+            
+            NSLog("about to assign X")
+            
+            let X = try? NSJSONSerialization.dataWithJSONObject(billdata, options: NSJSONWritingOptions())
+            
+            //NSLog(X)
+            
+            let W = try? NSJSONSerialization.JSONObjectWithData(X!, options: NSJSONReadingOptions())
+            
+            NSLog("assigning X to obj billing")
+            
+            obj["billing"] = billdata
+            
         }
         
         if (avsAddressPolicy != CityPayPolicy.Default || avsPostcodePolicy != CityPayPolicy.Default) {
@@ -126,8 +138,7 @@ public class CityPayRequest: NSObject {
         
 //        
         NSLog("Serializing JSON")
-        if let json = try? NSJSONSerialization.dataWithJSONObject(obj, options: NSJSONWritingOptions()) {
-            
+        if let json: NSData = try? NSJSONSerialization.dataWithJSONObject(obj, options: NSJSONWritingOptions()) {
             
             let request = NSMutableURLRequest()
             request.URL = CityPayConstants.url
@@ -137,7 +148,7 @@ public class CityPayRequest: NSObject {
             request.addValue("application/json", forHTTPHeaderField: "Accept")
             
             NSLog("Sending call to \(CityPayConstants.url)")
-            NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            let task: NSURLSessionDataTask = NSURLSession.sharedSession().dataTaskWithRequest(request) {
                 data, response, error in
                 
                 if let http = response as? NSHTTPURLResponse {
@@ -172,10 +183,10 @@ public class CityPayRequest: NSObject {
                     completion(PKPaymentAuthorizationStatus.Failure)
                 }
             }
+            task.resume()
         } else {
             assert(false, "JSON creation failure")
         }
-        
     }
 
 }
