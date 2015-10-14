@@ -73,7 +73,7 @@ public class CityPayRequest: NSObject {
             "merchantId": merchantId,
             "licenceKey": licenceKey,
             "identifier": identifier,
-            "test": String(test),
+            "test": test,
             "sdkVersion": version,
             "deviceVersion": NSProcessInfo().operatingSystemVersionString
         ]
