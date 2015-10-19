@@ -26,19 +26,41 @@ public class CityPayRequest: NSObject {
     let test: Bool
     let version: String = CityPayRequest.getVersion()
     
-    
     var avsAddressPolicy: CityPayPolicy = CityPayPolicy.Default
     var avsPostcodePolicy: CityPayPolicy = CityPayPolicy.Default
+    
+    /**
 
+        Retrieve the short version string from the relevant bundle.
+
+     */
     private static func getVersionFromBundle(bundle: NSBundle) -> String? {
         var infoDic: [String: AnyObject]? = bundle.infoDictionary
         if (infoDic != nil) {
-            return infoDic!["CFBundleVersion"] as? String
+            return (infoDic!["CFBundleShortVersionString"] as? String ?? "<Unknown>")
+                + " ("
+                + (infoDic!["CFBundleVersion"] as? String ?? "<Unknown>")
+                + ")"
         } else {
-            return nil
+            return "<Unknown> (<Unknown>)"
         }
     }
     
+    /**
+
+        Obtain the bundle object most closely associated with the specified
+        class.
+
+     */
+    private static func getVersionFromClassBundle(forClass aClass: AnyClass) -> String? {
+        return getVersionFromBundle(
+            NSBundle(forClass: aClass)
+        )
+    }
+    
+    /**
+
+     */
     private static func getVersion() -> String {
         var temp: String?
         
@@ -47,9 +69,7 @@ public class CityPayRequest: NSObject {
         )
         
         if (temp == nil) {
-            temp = getVersionFromBundle(
-                NSBundle(forClass: CityPayRequest.self)
-            )
+            temp = getVersionFromClassBundle(forClass: CityPayRequest.self)
         }
         
         return ((temp != nil) ? temp! : "Unknown CityPayKit host")
@@ -115,18 +135,7 @@ public class CityPayRequest: NSObject {
                 "country": payment.billingContact?.postalAddress?.ISOCountryCode ?? ""
             ]
             
-            NSLog("about to assign X")
-            
-            let X = try? NSJSONSerialization.dataWithJSONObject(billdata, options: NSJSONWritingOptions())
-            
-            //NSLog(X)
-            
-            let W = try? NSJSONSerialization.JSONObjectWithData(X!, options: NSJSONReadingOptions())
-            
-            NSLog("assigning X to obj billing")
-            
             obj["billing"] = billdata
-            
         }
         
         if (avsAddressPolicy != CityPayPolicy.Default || avsPostcodePolicy != CityPayPolicy.Default) {
