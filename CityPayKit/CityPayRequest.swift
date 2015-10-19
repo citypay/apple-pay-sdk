@@ -22,9 +22,10 @@ public class CityPayRequest: NSObject {
 
     let merchantId: Int
     let licenceKey: String
+    let accountNo: String
     let identifier: String
     let test: Bool
-    let version: String = CityPayRequest.getVersionFromClassBundle(CityPayRequest.self)
+    let version: String = CityPayRequest.getVersionFromClassBundle(forClass: CityPayRequest.self)
         ?? "<Unknown> (<Unknown>)"
     
     var avsAddressPolicy: CityPayPolicy = CityPayPolicy.Default
@@ -59,23 +60,58 @@ public class CityPayRequest: NSObject {
         )
     }
     
-    public init(merchantId: Int, licenceKey: String, identifier: String, test: Bool) {
-        assert(merchantId > 0, "Merchant ID is not valid")
-        assert(licenceKey != "", "Licence Key is not provided")
-        assert(identifier != "", "Identifier is not provided")
-        assert(identifier.characters.count >= 5, "Identifier must be between 5 and 50 characters")
-        assert(identifier.characters.count < 50, "Identifier must be between 5 and 50 characters")
-        self.merchantId = merchantId
-        self.licenceKey = licenceKey
-        self.identifier = identifier
-        self.test = test
-        NSLog(self.version)
+    /**
+
+        Default class initializer.
+    
+     */
+    public init(
+        merchantId: Int,
+        licenceKey: String,
+        accountNo: String,
+        identifier: String,
+        test: Bool
+    ) {
+            assert(merchantId > 0, "Merchant ID is not valid")
+            assert(licenceKey != "", "Licence Key is not provided")
+            assert(identifier != "", "Identifier is not provided")
+            assert(identifier.characters.count >= 5, "Identifier must be between 5 and 50 characters")
+            assert(identifier.characters.count < 50, "Identifier must be between 5 and 50 characters")
+            self.merchantId = merchantId
+            self.licenceKey = licenceKey
+            self.accountNo = accountNo
+            self.identifier = identifier
+            self.test = test
+            NSLog(self.version)
     }
+
+    /**
+
+        Convenience class initializer that does not require provision of
+        an account number.
+
+     */
+    public convenience init(
+        merchantId: Int,
+        licenceKey: String,
+        identifier: String,
+        test: Bool
+    ) {
+        self.init(
+            merchantId: merchantId,
+            licenceKey: licenceKey,
+            accountNo: "",
+            identifier: identifier,
+            test: test
+        )
+    }
+    
     
     func cpJson() -> NSDictionary {
         return [
             "merchantId": merchantId,
             "licenceKey": licenceKey,
+            "accountNo": accountNo,
             "identifier": identifier,
             "test": test,
             "sdkVersion": version,

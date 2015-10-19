@@ -1,0 +1,10 @@
+//
+//  CommonCrypto.xcconfig
+//  CommonCrypto
+//
+//  Created by Roger Bisson on 08/10/2015.
+//  Copyright © 2015 Roger Bisson. All rights reserved.
+//
+MODULEMAP_FILE[sdk=macosx*] = $(SRCROOT)/CommonCrypto/mac_osx.modulemap
+MODULEMAP_FILE[sdk=iphonesimulator*] = $(SRCROOT)/CommonCrypto/iphone_ios_simulator.modulemap
+MODULEMAP_FILE[sdk=iphoneos*] = $(SRCROOT)/CommonCrypto/iphone_ios.modulemap
