@@ -24,14 +24,15 @@ public class CityPayRequest: NSObject {
     let licenceKey: String
     let identifier: String
     let test: Bool
-    let version: String = CityPayRequest.getVersion()
+    let version: String = CityPayRequest.getVersionFromClassBundle(CityPayRequest.self)
+        ?? "<Unknown> (<Unknown>)"
     
     var avsAddressPolicy: CityPayPolicy = CityPayPolicy.Default
     var avsPostcodePolicy: CityPayPolicy = CityPayPolicy.Default
     
     /**
 
-        Retrieve the short version string from the relevant bundle.
+        Get the version string for the relevant bundle.
 
      */
     private static func getVersionFromBundle(bundle: NSBundle) -> String? {
@@ -42,13 +43,13 @@ public class CityPayRequest: NSObject {
                 + (infoDic!["CFBundleVersion"] as? String ?? "<Unknown>")
                 + ")"
         } else {
-            return "<Unknown> (<Unknown>)"
+            return nil
         }
     }
     
     /**
 
-        Obtain the bundle object most closely associated with the specified
+        Get the bundle object most closely associated with the specified
         class.
 
      */
@@ -56,23 +57,6 @@ public class CityPayRequest: NSObject {
         return getVersionFromBundle(
             NSBundle(forClass: aClass)
         )
-    }
-    
-    /**
-
-     */
-    private static func getVersion() -> String {
-        var temp: String?
-        
-        temp = getVersionFromBundle(
-            NSBundle.mainBundle()
-        )
-        
-        if (temp == nil) {
-            temp = getVersionFromClassBundle(forClass: CityPayRequest.self)
-        }
-        
-        return ((temp != nil) ? temp! : "Unknown CityPayKit host")
     }
     
     public init(merchantId: Int, licenceKey: String, identifier: String, test: Bool) {
