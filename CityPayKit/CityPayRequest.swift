@@ -37,7 +37,7 @@ public class CityPayRequest: NSObject {
     var transInfo: String? = nil
     
     //
-    //
+    //  Cardholder account number
     //
     var accountNo: String? = nil
     
