@@ -22,11 +22,24 @@ public class CityPayRequest: NSObject {
 
     let merchantId: Int
     let licenceKey: String
-    let accountNo: String
     let identifier: String
     let test: Bool
-    let version: String = CityPayRequest.getVersionFromClassBundle(forClass: CityPayRequest.self)
-        ?? "<Unknown> (<Unknown>)"
+    
+    //  
+    //  SDK and application version strings
+    //
+    let appVersion: String = CityPayRequest.getVersionFromMainBundle()
+    let sdkVersion: String = CityPayRequest.getVersionFromClassBundle(forClass: CityPayRequest.self)
+    
+    //
+    //  Transaction information
+    //
+    var transInfo: String? = nil
+    
+    //
+    //
+    //
+    var accountNo: String? = nil
     
     var avsAddressPolicy: CityPayPolicy = CityPayPolicy.Default
     var avsPostcodePolicy: CityPayPolicy = CityPayPolicy.Default
@@ -36,7 +49,7 @@ public class CityPayRequest: NSObject {
         Get the version string for the relevant bundle.
 
      */
-    private static func getVersionFromBundle(bundle: NSBundle) -> String? {
+    private static func getVersionFromBundle(bundle: NSBundle) -> String {
         var infoDic: [String: AnyObject]? = bundle.infoDictionary
         if (infoDic != nil) {
             return (infoDic!["CFBundleShortVersionString"] as? String ?? "<Unknown>")
@@ -44,7 +57,7 @@ public class CityPayRequest: NSObject {
                 + (infoDic!["CFBundleVersion"] as? String ?? "<Unknown>")
                 + ")"
         } else {
-            return nil
+            return "<Unknown> (<Unknown>)"
         }
     }
     
@@ -54,9 +67,20 @@ public class CityPayRequest: NSObject {
         class.
 
      */
-    private static func getVersionFromClassBundle(forClass aClass: AnyClass) -> String? {
+    private static func getVersionFromClassBundle(forClass aClass: AnyClass) -> String {
         return getVersionFromBundle(
             NSBundle(forClass: aClass)
+        )
+    }
+    
+    /**
+    
+        Get the bundle object associated with the current executable.
+
+     */
+    private static func getVersionFromMainBundle() -> String {
+        return getVersionFromBundle(
+            NSBundle.mainBundle()
         )
     }
     
@@ -68,7 +92,6 @@ public class CityPayRequest: NSObject {
     public init(
         merchantId: Int,
         licenceKey: String,
-        accountNo: String,
         identifier: String,
         test: Bool
     ) {
@@ -79,31 +102,34 @@ public class CityPayRequest: NSObject {
             assert(identifier.characters.count < 50, "Identifier must be between 5 and 50 characters")
             self.merchantId = merchantId
             self.licenceKey = licenceKey
-            self.accountNo = accountNo
             self.identifier = identifier
             self.test = test
-            NSLog(self.version)
+            NSLog(self.sdkVersion)
     }
-
+    
     /**
-
-        Convenience class initializer that does not require provision of
-        an account number.
+    
+        Update the account number to be associated with the relevant
+        payment transaction for the purpose of enabling continuous
+        authority.
 
      */
-    public convenience init(
-        merchantId: Int,
-        licenceKey: String,
-        identifier: String,
-        test: Bool
-    ) {
-        self.init(
-            merchantId: merchantId,
-            licenceKey: licenceKey,
-            accountNo: "",
-            identifier: identifier,
-            test: test
-        )
+    public func accountNo(accountNo: String) -> CityPayRequest
+    {
+        self.accountNo = accountNo;
+        return self
+    }
+    
+    /**
+
+        Update the transaction information string associated with a
+        particular payment transaction.
+
+     */
+    public func transInfo(transInfo: String) -> CityPayRequest
+    {
+        self.transInfo = transInfo
+        return self
     }
     
     
@@ -111,10 +137,12 @@ public class CityPayRequest: NSObject {
         return [
             "merchantId": merchantId,
             "licenceKey": licenceKey,
-            "accountNo": accountNo,
+            "accountNo": (accountNo ?? ""),
             "identifier": identifier,
+            "transInfo": (transInfo ?? ""),
             "test": test,
-            "sdkVersion": version,
+            "appVersion": appVersion,
+            "sdkVersion": sdkVersion,
             "deviceVersion": NSProcessInfo().operatingSystemVersionString
         ]
     }
