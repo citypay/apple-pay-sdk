@@ -1,5 +1,5 @@
 //
-//  CPResponse.swift
+//  CityPayResponse.swift
 //  CityPayKit
 //
 //  Created by Gary Feltham on 27/08/2015.
@@ -79,7 +79,7 @@ public class CityPayResponse: NSObject {
     /**
 
      */
-    private func log() -> String {
+    func log() -> String {
         return "RS:\(identifier),amount=\(amount),card=\(maskedPan),\(expMonth)\(expYear),authorised=\(authorised),mode=\(mode)"
     }
     

@@ -65,9 +65,9 @@ class CityPayKitTests: XCTestCase {
         return nil
     }
     
-    func testJsonRequest() {
+    /*func testJsonRequest() {
         let pay = CityPayRequest(merchantId: 13245, licenceKey: "LK", identifier: "Test1", test: true)
-        if let json = pay.toJson() {
+        if let json = pay.cpJson() {
             let str = NSString(data: json, encoding: NSUTF8StringEncoding)
             print(str)
             // need to link in swifty to tests
@@ -78,7 +78,5 @@ class CityPayKitTests: XCTestCase {
         } else {
             XCTFail("Json cannot be generated")
         }
-    }
-    
-    
+    }*/
 }

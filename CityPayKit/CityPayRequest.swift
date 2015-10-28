@@ -132,7 +132,6 @@ public class CityPayRequest: NSObject {
         return self
     }
     
-    
     func cpJson() -> NSDictionary {
         return [
             "merchantId": merchantId,
@@ -145,11 +144,6 @@ public class CityPayRequest: NSObject {
             "sdkVersion": sdkVersion,
             "deviceVersion": NSProcessInfo().operatingSystemVersionString
         ]
-    }
-    
-    // used for testing
-    @objc public func toJson() -> NSData? {
-        return try? NSJSONSerialization.dataWithJSONObject(cpJson(), options: NSJSONWritingOptions())
     }
     
     /**
