@@ -7,11 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D6CA7B61BD5469D0056B5D4 /* CommonCrypto.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3D6CA7B51BD5469D0056B5D4 /* CommonCrypto.xcconfig */; settings = {ASSET_TAGS = (); }; };
-		3D6CA7B71BD5469D0056B5D4 /* CommonCrypto.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3D6CA7B51BD5469D0056B5D4 /* CommonCrypto.xcconfig */; settings = {ASSET_TAGS = (); }; };
-		3D6CA7B91BD546AB0056B5D4 /* CommonCrypto in Resources */ = {isa = PBXBuildFile; fileRef = 3D6CA7B81BD546AB0056B5D4 /* CommonCrypto */; settings = {ASSET_TAGS = (); }; };
-		3D6CA7BA1BD546AB0056B5D4 /* CommonCrypto in Resources */ = {isa = PBXBuildFile; fileRef = 3D6CA7B81BD546AB0056B5D4 /* CommonCrypto */; settings = {ASSET_TAGS = (); }; };
-		3D6CA7BD1BD547F70056B5D4 /* libcommonCrypto.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6CA7BC1BD547F70056B5D4 /* libcommonCrypto.tbd */; };
+		3D6CA7B91BD546AB0056B5D4 /* CommonCrypto in Resources */ = {isa = PBXBuildFile; fileRef = 3D6CA7B81BD546AB0056B5D4 /* CommonCrypto */; };
+		3D6CA7BA1BD546AB0056B5D4 /* CommonCrypto in Resources */ = {isa = PBXBuildFile; fileRef = 3D6CA7B81BD546AB0056B5D4 /* CommonCrypto */; };
 		4E5399801B96EEA9005F15AA /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E53997F1B96EEA9005F15AA /* SwiftyJSON.swift */; };
 		4E7821A11B9473F8008CB0E8 /* CityPayKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E7821A01B9473F8008CB0E8 /* CityPayKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E7821B81B94743A008CB0E8 /* CityPayRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7821B71B94743A008CB0E8 /* CityPayRequest.swift */; };
@@ -48,7 +45,6 @@
 		3D089FAA1BCBB9DB00923276 /* CityPayKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CityPayKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D6CA7B51BD5469D0056B5D4 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
 		3D6CA7B81BD546AB0056B5D4 /* CommonCrypto */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CommonCrypto; sourceTree = "<group>"; };
-		3D6CA7BC1BD547F70056B5D4 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
 		4E53997F1B96EEA9005F15AA /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		4E78219F1B9473F8008CB0E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E7821A01B9473F8008CB0E8 /* CityPayKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityPayKit.h; sourceTree = "<group>"; };
@@ -66,7 +62,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D6CA7BD1BD547F70056B5D4 /* libcommonCrypto.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +78,6 @@
 		4E7821911B9473F8008CB0E8 = {
 			isa = PBXGroup;
 			children = (
-				3D6CA7BC1BD547F70056B5D4 /* libcommonCrypto.tbd */,
 				3D6CA7B81BD546AB0056B5D4 /* CommonCrypto */,
 				3D6CA7B51BD5469D0056B5D4 /* CommonCrypto.xcconfig */,
 				4E78219D1B9473F8008CB0E8 /* CityPayKit */,
@@ -192,7 +186,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "CityPay Limited";
 				TargetAttributes = {
 					4E78219A1B9473F8008CB0E8 = {
@@ -228,7 +222,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D6CA7B91BD546AB0056B5D4 /* CommonCrypto in Resources */,
-				3D6CA7B61BD5469D0056B5D4 /* CommonCrypto.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +232,6 @@
 				4E7821C51B9476F0008CB0E8 /* example1.json in Resources */,
 				4E7821C61B9476F0008CB0E8 /* sha256-example.json in Resources */,
 				3D6CA7BA1BD546AB0056B5D4 /* CommonCrypto in Resources */,
-				3D6CA7B71BD5469D0056B5D4 /* CommonCrypto.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,7 +313,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos9.0;
+				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				"VALID_ARCHS[sdk=iphoneos*]" = "arm64 armv7 armv7s";
@@ -370,7 +362,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos9.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				"VALID_ARCHS[sdk=iphoneos*]" = "arm64 armv7 armv7s";
